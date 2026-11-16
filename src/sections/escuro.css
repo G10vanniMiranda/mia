@@ -1,0 +1,93 @@
+/* painel vermelho-noite: envolve o rosto e a entrega */
+.escuro {
+  position: relative;
+  background: var(--noite);
+  color: var(--creme);
+}
+
+/* feixes presos à tela enquanto o escuro dura */
+.feixes {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  margin-bottom: -100vh;
+  overflow: hidden;
+  pointer-events: none;
+}
+.feixes span {
+  position: absolute;
+  width: 70vmax;
+  height: 70vmax;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 42, 61, 0.55), rgba(122, 6, 18, 0.35) 45%, rgba(122, 6, 18, 0) 100%);
+  opacity: 0.75;
+  animation: deriva 19s ease-in-out infinite alternate;
+}
+.feixes span:nth-child(1) { left: -18vmax; top: -22vmax; animation-duration: 17s; }
+.feixes span:nth-child(2) { right: -24vmax; top: 6vh; animation-duration: 21s; animation-direction: alternate-reverse; }
+.feixes span:nth-child(3) { left: 8vw; bottom: -40vmax; animation-duration: 24s; }
+.feixes span:nth-child(4) { right: 10vw; top: -38vmax; width: 50vmax; height: 50vmax; opacity: 0.45; animation-duration: 20s; animation-direction: alternate-reverse; }
+@keyframes deriva {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(6vw, 4vh, 0) scale(1.12); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .feixes span { animation: none; }
+}
+
+/* o pin põe position: fixed; z 2 e fundo transparente mantêm os textos acima do canvas */
+.rosto, .entrega {
+  position: relative;
+  z-index: 2;
+  height: 100vh;
+  background: transparent;
+}
+.pin {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(78px, 12vh, 124px) var(--margem) clamp(24px, 5vh, 44px);
+}
+.pin__pe {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+}
+
+.rosto__title { font-size: clamp(48px, 8.4vw, 160px); }
+.rosto__title .split + .split { text-align: right; }
+.rosto__prazo { display: flex; align-items: center; gap: 18px; }
+.rosto__prazo .small { opacity: 0.7; }
+
+.entrega__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.4em;
+  font-size: clamp(40px, 6.6vw, 124px);
+}
+.entrega__title .split + .split { margin-top: 0.45em; }
+.escada { font-size: 13px; line-height: 1.6; }
+.escada li:nth-child(2) { padding-left: 2.4em; }
+.escada li:nth-child(3) { padding-left: 4.8em; }
+.escada li:nth-child(4) { padding-left: 7.2em; }
+.entrega__nota { max-width: 10.5em; text-align: right; }
+
+@media (max-width: 759px) {
+  .rosto__title .split, .entrega__title .split { white-space: normal; }
+  .pin__pe { position: relative; flex-direction: column; align-items: stretch; gap: 20px; }
+  /* no retrato o pé fica sobre a nuvem: um degradê escuro mantém o texto legível */
+  .pin__pe::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -56px calc(-1 * var(--margem)) clamp(-44px, -5vh, -24px);
+    background: linear-gradient(to bottom, rgba(20, 0, 10, 0), rgba(20, 0, 10, 0.82) 45%);
+  }
+  .rosto__prazo { align-self: flex-end; }
+  .entrega__title { flex-direction: column; gap: 0; }
+  .entrega__title .split + .split { align-self: flex-end; margin-top: 0.15em; }
+  .entrega__nota { align-self: flex-end; }
+}

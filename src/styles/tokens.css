@@ -1,0 +1,47 @@
+@font-face {
+  font-family: 'Melodrama';
+  src: url('/fonts/Melodrama-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Melodrama';
+  src: url('/fonts/Melodrama-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/GeneralSans-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/GeneralSans-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --creme: #efeee8;
+  --tinta: #111111;
+  --cinza: #8d8b84;
+  --vermelho: #e5141f;
+  --vermelho-escuro: #c10f19;
+  --noite: #14000a;
+  --feixe: #7a0612;
+  --brilho: #ff2a3d;
+  --rodape: #6f6d66;
+
+  --display: 'Melodrama', 'Italiana', serif;
+  --serif: 'Instrument Serif', 'Times New Roman', serif;
+  --sans: 'General Sans', system-ui, sans-serif;
+
+  --margem: clamp(18px, 4.4vw, 72px);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}

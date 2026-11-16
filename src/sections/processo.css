@@ -1,0 +1,160 @@
+/* painel creme que sobe por cima do canvas, com entalhe chanfrado no topo */
+.processo {
+  --col: clamp(150px, 17vw, 300px);
+  position: relative;
+  z-index: 3;
+  height: 380vh;
+  margin-top: -15vh;
+  color: var(--tinta);
+}
+.processo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--creme);
+  clip-path: polygon(
+    0 0,
+    calc(50% - var(--col) / 2 - 3vw) 0,
+    calc(50% - var(--col) / 2) 15vh,
+    calc(50% + var(--col) / 2) 15vh,
+    calc(50% + var(--col) / 2 + 3vw) 0,
+    100% 0, 100% 100%, 0 100%
+  );
+}
+
+.tunel {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  perspective: 1200px;
+}
+/* brilho vermelho suave no centro */
+.tunel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 46% 52% at 50% 50%, rgba(229, 20, 31, 0.1), rgba(229, 20, 31, 0) 100%);
+  pointer-events: none;
+}
+.tunel__grade {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(17, 17, 17, 0.2) 1px, transparent 1.4px);
+  background-size: 30px 30px;
+  background-position: center;
+  -webkit-mask-image: radial-gradient(ellipse 70% 62% at 50% 50%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 62% at 50% 50%, #000 30%, transparent 100%);
+}
+.tunel__aro {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 48vmin;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  border: 1px solid rgba(229, 20, 31, 0.32);
+}
+.tunel__aro--tracejado { width: 76vmin; border: 1px dashed rgba(229, 20, 31, 0.3); }
+
+/* um só contexto 3D: o centro (z 0) e as cartas se ordenam pela profundidade */
+.tunel__espaco { position: absolute; inset: 0; transform-style: preserve-3d; }
+
+.tunel__centro {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  text-align: center;
+  pointer-events: none;
+}
+.tunel__kicker {
+  margin-bottom: 18px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--vermelho);
+}
+.passos { display: grid; }
+.passo {
+  grid-area: 1 / 1;
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  opacity: 0;
+  transition: opacity 0.45s var(--ease);
+}
+.passo.is-on { opacity: 1; }
+.passo__nome { font-size: clamp(56px, 10vw, 180px); white-space: nowrap; }
+.passo__nome .ch { display: inline-block; opacity: 0.08; }
+.passo .small {
+  max-width: 26em;
+  padding: 0 var(--margem);
+  color: rgba(17, 17, 17, 0.75);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s var(--ease) 0.15s, transform 0.6s var(--ease) 0.15s;
+}
+.passo.is-on .small { opacity: 1; transform: none; }
+
+html.rm .passo:not(:first-child) { display: none; }
+html.rm .passo:first-child,
+html.rm .passo:first-child .small { opacity: 1; transform: none; }
+html.rm .passo__nome .ch { opacity: 1; }
+
+/* cartas 9:16: o transform e a opacidade são escritos a cada quadro por motion/tunel.js */
+.tunel__card {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: clamp(170px, 15vw, 250px);
+  aspect-ratio: 9 / 16;
+  border-radius: 16px;
+  overflow: hidden;
+  opacity: 0;
+  background: #d9d6cc;
+  border: 2px solid transparent;
+  box-shadow: 0 24px 50px -18px rgba(40, 10, 10, 0.45), 0 4px 12px rgba(40, 10, 10, 0.12);
+  transition: border-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  will-change: transform, opacity;
+}
+.tunel__card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+.tunel__card:hover { border-color: var(--vermelho); box-shadow: 0 30px 60px -18px rgba(229, 20, 31, 0.45); }
+.tunel__card:hover img { transform: scale(1.08); }
+.tunel__card figcaption {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 36px 14px 12px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.62));
+  color: #fff;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.tunel__dica {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  translate: -50% 0;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(17, 17, 17, 0.6);
+}
+.tunel__dica::after { content: ''; width: 1px; height: 38px; background: var(--vermelho); }
+
+@media (max-width: 767px) {
+  .tunel { perspective: 900px; }
+  .tunel__card { width: clamp(120px, 34vw, 170px); border-radius: 12px; }
+}

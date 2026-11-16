@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mia — Estúdio de UGC com IA</title>
+  <meta name="description" content="Mia é uma criadora de conteúdo feita em IA, com rosto licenciado e voz própria: lotes de 30 vídeos UGC para marcas que testam anúncio toda semana.">
+  <meta name="theme-color" content="#e5141f">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/Melodrama-Light.woff2" as="font" type="font/woff2" crossorigin>
+  <style>
+    /* crítico: a abertura cobre a página antes do CSS carregar */
+    html.intro-on .loader { display: grid; }
+    .loader { display: none; position: fixed; inset: 0; z-index: 100; background: #e5141f; place-items: center; }
+  </style>
+  <script>
+    (function () {
+      // antes do ScrollTrigger: ele guarda este valor no registerPlugin e o repõe a cada refresh
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      var d = document.documentElement;
+      d.classList.add(matchMedia('(prefers-reduced-motion: reduce)').matches ? 'rm' : 'intro-on');
+      if (matchMedia('(hover: none)').matches) d.classList.add('touch');
+    })();
+  </script>
+  <script type="module" src="/src/main.js"></script>
+</head>
+<body>
+  <div class="loader" aria-hidden="true">
+    <div class="loader__count"><span class="loader__num">000</span></div>
+  </div>
+
+  <canvas class="gl" aria-hidden="true"></canvas>
+
+  <header class="nav">
+    <a class="nav__marca" href="#topo" aria-label="Mia, voltar ao topo">Mia</a>
+    <span class="nav__sub">Estúdio de UGC com IA</span>
+    <a class="nav__cta" href="#chama">Reservar um lote</a>
+  </header>
+
+  <main>
+    <section class="hero" id="topo">
+      <h1 class="hero__title" aria-label="Mia"><span class="split" data-split>Mia</span></h1>
+      <div class="hero__row">
+        <div class="hero__lead">
+          <p class="frase">Prazer, a criadora que grava trinta ganchos<br>antes do seu café esfriar.</p>
+          <ul class="hero__meta">
+            <li>/ Lote — 30 vídeos</li>
+            <li>/ a partir de R$ 4.900</li>
+          </ul>
+        </div>
+        <div class="hero__cta">
+          <p class="small">Uma criadora de conteúdo feita em IA, com rosto licenciado e voz própria, para marcas que testam anúncio toda semana.</p>
+          <a class="btn" href="#chama">Reservar um lote</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="escuro">
+      <div class="feixes" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+
+      <section class="rosto">
+        <div class="pin">
+          <h2 class="rosto__title titulo" aria-label="Um rosto só, mil versões dela">
+            <span class="split" data-split>Um rosto só,</span>
+            <span class="split" data-split>mil versões dela</span>
+          </h2>
+          <div class="pin__pe">
+            <p class="frase">Cada vídeo sai marcado como IA,<br>do jeito que as plataformas pedem.</p>
+            <p class="rosto__prazo"><span class="frase">5 dias</span><span class="small">do briefing ao primeiro lote<br>na sua pasta</span></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="entrega">
+        <div class="pin">
+          <h2 class="entrega__title titulo" aria-label="O que chega na sua pasta">
+            <span class="split" data-split>O que chega</span>
+            <span class="split" data-split>na sua pasta</span>
+          </h2>
+          <div class="pin__pe">
+            <ul class="escada">
+              <li>/ Cortes em 9:16, 4:5 e 1:1</li>
+              <li>/ Legenda em dois estilos</li>
+              <li>/ Cinco ganchos por roteiro</li>
+              <li>/ Voz e cenas de apoio liberadas</li>
+            </ul>
+            <p class="frase entrega__nota">Os arquivos ficam com você: tráfego pago, orgânico e afiliados, pelo tempo que quiser.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="processo" aria-labelledby="como-funciona">
+      <div class="tunel">
+        <div class="tunel__grade" aria-hidden="true"></div>
+        <div class="tunel__aro" aria-hidden="true"></div>
+        <div class="tunel__aro tunel__aro--tracejado" aria-hidden="true"></div>
+        <div class="tunel__espaco">
+          <div class="tunel__centro">
+            <h2 class="tunel__kicker" id="como-funciona">Como funciona</h2>
+            <div class="passos">
+              <div class="passo">
+                <h3 class="passo__nome" data-split>Pauta</h3>
+                <p class="small">Você manda o produto, a oferta e o público. Três ganchos voltam no mesmo dia.</p>
+              </div>
+              <div class="passo">
+                <h3 class="passo__nome" data-split>Produção</h3>
+                <p class="small">A Mia grava em casa, na rua, na academia: onde o seu cliente está.</p>
+              </div>
+              <div class="passo">
+                <h3 class="passo__nome" data-split>Pacote</h3>
+                <p class="small">Trinta vídeos editados, legendados e nomeados por gancho, prontos para subir.</p>
+              </div>
+            </div>
+          </div>
+          <figure class="tunel__card"><img src="/img/ugc/espelho.webp" alt="Mia, personagem de IA, mostrando um sérum na frente do espelho" loading="lazy" decoding="async"><figcaption>01 / Rotina de pele</figcaption></figure>
+          <figure class="tunel__card"><img src="/img/ugc/cozinha.webp" alt="Mia, personagem de IA, com uma caneca na cozinha" loading="lazy" decoding="async"><figcaption>02 / Café da manhã</figcaption></figure>
+          <figure class="tunel__card"><img src="/img/ugc/rua.webp" alt="Mia, personagem de IA, gravando uma selfie na rua" loading="lazy" decoding="async"><figcaption>03 / Na rua</figcaption></figure>
+          <figure class="tunel__card"><img src="/img/ugc/carro.webp" alt="Mia, personagem de IA, falando para a câmera dentro do carro" loading="lazy" decoding="async"><figcaption>04 / Review no carro</figcaption></figure>
+          <figure class="tunel__card"><img src="/img/ugc/sofa.webp" alt="Mia, personagem de IA, sentada no sofá" loading="lazy" decoding="async"><figcaption>05 / Antes e depois</figcaption></figure>
+          <figure class="tunel__card"><img src="/img/ugc/academia.webp" alt="Mia, personagem de IA, na academia depois do treino" loading="lazy" decoding="async"><figcaption>06 / Pós-treino</figcaption></figure>
+          <figure class="tunel__card"><img src="/img/ugc/mesa.webp" alt="Mia, personagem de IA, na mesa de trabalho em casa" loading="lazy" decoding="async"><figcaption>07 / Home office</figcaption></figure>
+          <figure class="tunel__card"><img src="/img/ugc/parque.webp" alt="Mia, personagem de IA, num piquenique no parque" loading="lazy" decoding="async"><figcaption>08 / Piquenique</figcaption></figure>
+          <figure class="tunel__card"><img src="/img/ugc/cama.webp" alt="Mia, personagem de IA, abrindo uma caixa na cama" loading="lazy" decoding="async"><figcaption>09 / Unboxing</figcaption></figure>
+        </div>
+        <p class="tunel__dica" aria-hidden="true">Role para atravessar</p>
+      </div>
+    </section>
+
+    <section class="fecho" id="chama">
+      <div class="fecho__bloco">
+        <h2 class="fecho__title titulo" aria-label="Chama a Mia">
+          <span class="split" data-split>Chama</span>
+          <span class="split" data-split>a Mia</span>
+        </h2>
+        <div class="fecho__row">
+          <div class="fecho__texto">
+            <p class="frase">Restam duas vagas em novembro.</p>
+            <p class="small">Conta o produto e a oferta. Em até 24 horas chegam três ganchos para você aprovar antes de pagar qualquer coisa.</p>
+          </div>
+          <a class="pilula" href="mailto:oi@chamaamia.com.br">oi@chamaamia.com.br</a>
+        </div>
+      </div>
+      <footer class="rodape">
+        <span>© 2026 Mia Estúdio</span>
+        <span>Personagem criada por IA. Rosto fictício, sinalizado em todos os vídeos.</span>
+      </footer>
+    </section>
+  </main>
+</body>
+</html>
